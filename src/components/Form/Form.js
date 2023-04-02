@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contactSlice';
 import { FormBox, Input } from './Form.styled';
+import { addContactThunk } from 'redux/asyncThunk';
 
 export function Form() {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export function Form() {
       number: evt.target.elements.number.value,
     };
 
-    dispatch(addContact(newContact));
+    dispatch(addContactThunk(newContact));
 
     evt.target.reset();
   };

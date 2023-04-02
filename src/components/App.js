@@ -2,10 +2,19 @@ import { Section } from './Section/Section';
 import { Form } from './Form/Form';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectContacts } from 'redux/selector';
+import { useEffect } from 'react';
+import { getContactsThunk } from 'redux/asyncThunk';
 
 export function App() {
-  const user = useSelector(state => state.contacts.items);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContactsThunk());
+  }, [dispatch]);
+
+  const user = useSelector(selectContacts);
 
   return (
     <Section>
